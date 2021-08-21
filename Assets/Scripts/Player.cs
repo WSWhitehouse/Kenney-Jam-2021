@@ -1,42 +1,21 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    [SerializeField] private float rotateSpeed = 5;
-    [SerializeField] private float moveSpeed = 5;
+    [SerializeField] private float maxHealth = 100.0f;
 
-    private Rigidbody2D _rigidbody;
+    private float _health;
 
-    private void Awake()
+    private void OnEnable()
     {
-        _rigidbody = GetComponent<Rigidbody2D>();
+        _health = maxHealth;
     }
 
-    private void Update()
+    private void OnCollisionEnter2D(Collision2D other)
     {
-        Vector3 angles = transform.localEulerAngles;
-
-        if (Input.GetKey(KeyCode.A)) // Rotate left
+        if (other.gameObject.CompareTag("Asteroid"))
         {
-            angles.z += rotateSpeed * Time.deltaTime;
+            _health -= 10.0f;
         }
-
-        if (Input.GetKey(KeyCode.D)) // Rotate right
-        {
-            angles.z -= rotateSpeed* Time.deltaTime;
-        }
-
-        transform.localEulerAngles = angles;
-
-        if (Input.GetKey(KeyCode.W)) // Move 
-        {
-            _rigidbody.AddRelativeForce(Vector2.up);
-        }
-
-        if (Input.GetKey(KeyCode.Space)) // Shoot
-        { }
     }
 }
