@@ -22,7 +22,7 @@ public class HealthBar : MonoBehaviour
     {
         float val = player.Health / player.MaxHealth;
         _image.fillAmount = val;
-        _image.color = new Color(1,1,1,1); //Color.Lerp(lowHealthColor, highHealthColor, val));
+        _image.color = Color.Lerp(lowHealthColor, highHealthColor, val);
         _image.SetAllDirty();
     }
 }

@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Bullet : MonoBehaviour
@@ -22,6 +19,12 @@ public class Bullet : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D other)
     {
-        gameObject.SetActive(false);    
+        gameObject.SetActive(false);
+
+        if (other.gameObject.CompareTag("Asteroid"))
+        {
+            // Add to score
+            Score.Instance.HitAsteroid();
+        }
     }
 }
